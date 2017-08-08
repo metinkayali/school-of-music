@@ -1,10 +1,6 @@
 #r "FSharp.Powerpack.dll"
 type Octave = int
 type Dur = BigRational
-
-let wn: Octave = 1
-let bn: Octave = 2
-let qn: Dur = 1N / 4N // quarter note
 type PitchClass = Cff | Cf | C | Dff | Cs | Df | Css | D | Eff | Ds
                 | Ef | Fff | Dss | E | Ff | Es | F | Gff | Ess | Fs
                 | Gf | Fss | G | Aff | Gs | Af | Gss | A | Bff | As
@@ -15,6 +11,42 @@ type Pitch = PitchClass * Octave
 let a440: Pitch = (A, 4)
 type Primitive<'a> = Note of Dur * 'a
                    | Rest of Dur
+
+let bn: Dur = 2N
+let wn: Dur = 1N
+let hn: Dur = 1N/2N
+let qn: Dur = 1N/4N
+let en: Dur = 1N/8N
+let sn: Dur = 1N/16N
+let tn: Dur = 1N/32N
+let sfn: Dur = 1N/64N
+let dwn: Dur = 3N/2N
+let dhn: Dur = 3N/4N
+let dqn: Dur = 3N/8N
+let den: Dur = 3N/16N
+let dsn: Dur = 3N/32N
+let dtn: Dur = 3N/64N
+let ddhn: Dur = 7N/8N
+let ddqn: Dur = 7N/16N
+let dden: Dur = 7N/32N
+
+let bnr = Rest bn
+let wnr = Rest wn
+let hnr = Rest hn
+let qnr = Rest qn
+let enr = Rest en
+let snr = Rest sn
+let tnr = Rest tn
+let sfnr = Rest sfn
+let dwnr = Rest dwn
+let dhnr = Rest dhn
+let dqnr = Rest dqn
+let denr = Rest den
+let dsnr = Rest dsn
+let dtnr = Rest dtn
+let ddhnr = Rest ddhn
+let ddqnr = Rest ddqn
+let ddenr = Rest dden
 
 type PlayerName = string
 type Mode = Major | Minor
@@ -89,16 +121,44 @@ let phrase pa m = Modify((Phrase pa), m)
 let player p m = Modify((Player p), m)
 let keysig pc mo m = Modify((KeySig (pc, mo)), m)
 
-let c d (o: Octave) = Prim(Note (d, ((C, o): Pitch)))
-let d d (o: Octave) = Prim(Note (d, ((D, o): Pitch)))
-let e d (o: Octave) = Prim(Note (d, ((E, o): Pitch)))
-let f d (o: Octave) = Prim(Note (d, ((F, o): Pitch)))
-let g d (o: Octave) = Prim(Note (d, ((G, o): Pitch)))
-let a d (o: Octave) = Prim(Note (d, ((A, o): Pitch)))
-let b d (o: Octave) = Prim(Note (d, ((B, o): Pitch)))
+let cff (o: Octave) d = Prim(Note (d, ((Cff, o): Pitch)))
+let cf (o: Octave) d = Prim(Note (d, ((Cf, o): Pitch)))
+let c (o: Octave) d = Prim(Note (d, ((C, o): Pitch)))
+let cs (o: Octave) d = Prim(Note (d, ((Cs, o): Pitch)))
+let css (o: Octave) d = Prim(Note (d, ((Css, o): Pitch)))
+let dff (o: Octave) d = Prim(Note (d, ((Dff, o): Pitch)))
+let df (o: Octave) d = Prim(Note (d, ((Df, o): Pitch)))
+let d (o: Octave) d = Prim(Note (d, ((D, o): Pitch)))
+let ds (o: Octave) d = Prim(Note (d, ((Ds, o): Pitch)))
+let dss (o: Octave) d = Prim(Note (d, ((Dss, o): Pitch)))
+let eff (o: Octave) d = Prim(Note (d, ((Eff, o): Pitch)))
+let ef (o: Octave) d = Prim(Note (d, ((Ef, o): Pitch)))
+let e (o: Octave) d = Prim(Note (d, ((E, o): Pitch)))
+let es (o: Octave) d = Prim(Note (d, ((Es, o): Pitch)))
+let ess (o: Octave) d = Prim(Note (d, ((Ess, o): Pitch)))
+let fff (o: Octave) d = Prim(Note (d, ((Fff, o): Pitch)))
+let ff (o: Octave) d = Prim(Note (d, ((Ff, o): Pitch)))
+let f (o: Octave) d = Prim(Note (d, ((F, o): Pitch)))
+let fs (o: Octave) d = Prim(Note (d, ((Fs, o): Pitch)))
+let fss (o: Octave) d = Prim(Note (d, ((Fss, o): Pitch)))
+let gff (o: Octave) d = Prim(Note (d, ((Gff, o): Pitch)))
+let gf (o: Octave) d = Prim(Note (d, ((Gf, o): Pitch)))
+let g (o: Octave) d = Prim(Note (d, ((G, o): Pitch)))
+let gs (o: Octave) d = Prim(Note (d, ((Gs, o): Pitch)))
+let gss (o: Octave) d = Prim(Note (d, ((Gss, o): Pitch)))
+let aff (o: Octave) d = Prim(Note (d, ((Aff, o): Pitch)))
+let af (o: Octave) d = Prim(Note (d, ((Af, o): Pitch)))
+let a (o: Octave) d = Prim(Note (d, ((A, o): Pitch)))
+let as' (o: Octave) d = Prim(Note (d, ((As, o): Pitch)))
+let ass (o: Octave) d = Prim(Note (d, ((Ass, o): Pitch)))
+let bff (o: Octave) d = Prim(Note (d, ((Bff, o): Pitch)))
+let bf (o: Octave) d = Prim(Note (d, ((Bf, o): Pitch)))
+let b (o: Octave) d = Prim(Note (d, ((B, o): Pitch)))
+let bs (o: Octave) d = Prim(Note (d, ((Bs, o): Pitch)))
+let bss (o: Octave) d = Prim(Note (d, ((Bss, o): Pitch)))
 
 let t251 =
-  let dMinor = Par(Par(d 4N wn, f 4N wn), a 4N wn)
-  let gMajor = Par(Par(g 4N wn, b 4N wn), d 5N wn)
-  let cMajor = Par(Par(c 4N wn, e 4N wn), g 4N wn)
+  let dMinor = Par(Par(d 4 wn, f 4 wn), a 4 wn)
+  let gMajor = Par(Par(g 4 wn, b 4 wn), d 5 wn)
+  let cMajor = Par(Par(c 4 bn, e 4 bn), g 4 bn)
   Seq(Seq(dMinor, gMajor), cMajor)
