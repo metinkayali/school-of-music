@@ -162,3 +162,55 @@ let t251 =
   let gMajor = Par(Par(g 4 wn, b 4 wn), d 5 wn)
   let cMajor = Par(Par(c 4 bn, e 4 bn), g 4 bn)
   Seq(Seq(dMinor, gMajor), cMajor)
+
+let triple ((p, o): Pitch) =
+  match p with
+  | C -> (c o, e o, g o)
+  | D -> (d o, f o, a o)
+  | E -> (e o, g o, b o)
+  | F -> (f o, a o, c (o+1))
+  | G -> (g o, b o, d (o+1))
+  | A -> (a o, c (o+1), e (o+1))
+  | B -> (b o, d (o+1), f(o+1))
+  | _ -> (c o, e o, g o)
+let second ((p, o): Pitch) =
+  match p with
+  | C -> triple (D, o)
+  | D -> triple (E, o)
+  | E -> triple (F, o)
+  | F -> triple (G, o)
+  | G -> triple (A, o)
+  | A -> triple (B, o)
+  | B -> triple (C, (o+1))
+  | _ -> triple (C, (o+1))
+let fifth ((p, o): Pitch) =
+  match p with
+  | C -> triple (G, o)
+  | D -> triple (A, o)
+  | E -> triple (B, o)
+  | F -> triple (C, (o+1))
+  | G -> triple (D, (o+1))
+  | A -> triple (E, (o+1))
+  | B -> triple (F, (o+1))
+  | _ -> triple (F, (o+1))
+let first ((p, o): Pitch) =
+  match p with
+  | C -> triple (C, o)
+  | D -> triple (D, o)
+  | E -> triple (E, o)
+  | F -> triple (F, o)
+  | G -> triple (G, o)
+  | A -> triple (A, o)
+  | B -> triple (B, o)
+  | _ -> triple (B, o)
+
+let twoFiveOne (p: Pitch) (dur: Dur) =
+  let (t1, t2, t3) = second p
+  let (f1, f2, f3) = fifth p
+  let (fr1, fr2, fr3) = first p
+  let twoMinor = Par(Par(t1 dur, t2 dur), t3 dur)
+  let fiveMajor = Par(Par(f1 dur, f2 dur), f3 dur)
+  let oneMajor = Par(Par(fr1 dur, fr2 dur), fr3 dur)
+  Seq(Seq( twoMinor, fiveMajor ), oneMajor)
+
+let my251 = twoFiveOne (C, 4) wn
