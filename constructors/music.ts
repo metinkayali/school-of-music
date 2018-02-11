@@ -1,4 +1,7 @@
-import { Music, Tempo, Dur, Pitch, Transpose, AbsPitch, SequentialMusic, ParallelMusic, Octave } from './music';
+import {
+  Music,
+  Tempo, Dur, Pitch, Transpose, AbsPitch, SequentialMusic, ParallelMusic, Octave
+} from '../types';
 
 export function rest<A>(dur: Dur): Music<A> {
   return { primitive: { dur } };
@@ -44,31 +47,6 @@ export function keySig<A>(pitchClass: 'Major' | 'Minor', music: Music<A>): Music
   return { control: { pitchClass }, music };
 }
 
-export const qn: Dur = 1;
-export const wn: Dur = 4;
-export const bn: Dur = 2;
-
-const dMin = par(
-  par (
-    note(wn, { octave: 4, pitchClass: 'D' }),
-    note(wn, { octave: 4, pitchClass: 'F' })),
-    note(wn, { octave: 4, pitchClass: 'A' })
-);
-const gMaj = par(
-  par (
-    note(wn, { octave: 4, pitchClass: 'G' }),
-    note(wn, { octave: 4, pitchClass: 'B' })),
-    note(wn, { octave: 5, pitchClass: 'D' })
-);
-const cMaj = par(
-  par (
-    note(bn, { octave: 4, pitchClass: 'C' }),
-    note(bn, { octave: 4, pitchClass: 'E' })),
-    note(bn, { octave: 4, pitchClass: 'G' })
-);
-
-export const t251 = seq (
-  seq ( dMin,
-        gMaj ),
-        cMaj
-);
+export const wnr = <A>(): Music<A> => rest(wn);
+export const bnr = <A>(): Music<A> => rest(bn);
+export const qnr = <A>(): Music<A> => rest(qn);

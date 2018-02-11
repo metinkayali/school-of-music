@@ -1,4 +1,4 @@
-import { note, rest, wn, bn, qn } from './utilities';
+import { note, rest, wn, bn, qn } from './music';
 import { Octave, Dur, Pitch, Music } from './music';
 
 export const cff = (octave: Octave, dur: Dur): Music<Pitch> =>
@@ -71,7 +71,3 @@ export const bs = (octave: Octave, dur: Dur): Music<Pitch> =>
   note(dur, { octave, pitchClass: 'Bs' });
 export const bss = (octave: Octave, dur: Dur): Music<Pitch> =>
   note(dur, { octave, pitchClass: 'Bss' });
-
-export const wnr = <A>(): Music<A> => rest(wn);
-export const bnr = <A>(): Music<A> => rest(bn);
-export const qnr = <A>(): Music<A> => rest(qn);

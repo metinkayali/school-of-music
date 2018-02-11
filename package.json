@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/metinkayali/school-of-music#readme",
   "devDependencies": {
+    "json-beautify": "^1.0.1",
     "ts-node": "^4.1.0",
     "typescript": "^2.6.2"
   }
