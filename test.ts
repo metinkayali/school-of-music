@@ -1,7 +1,3 @@
-import * as m from "./music";
+import { t251 } from './utilities';
 
-const concertA: m.Pitch = { octave: 4, pitchClass: 'C' };
-const prim: m.Prim<m.Pitch> = { primitive: { dur: 1, pitch: concertA } };
-const music: m.Music<m.Pitch> = prim;
-
-console.log(music);
+console.log(JSON.stringify(t251));

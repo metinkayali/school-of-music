@@ -16,9 +16,38 @@ export type Note<T> = {
   pitch: T;
 }
 
+export type AbsPitch = number;
+
 export type Rest = {
   dur: Dur;
 }
+
+export type Tempo = {
+  rational: number;
+}
+
+export type Transpose = {
+  absPitch: AbsPitch;
+}
+
+export type Instrument = {
+  instrumentName: string;
+}
+
+export type Player = {
+  playerName: string;
+}
+
+export type KeySig = {
+  pitchClass: 'Major' | 'Minor';
+}
+
+export type Control =
+  | Tempo
+  | Transpose
+  | Instrument
+  | Player
+  | KeySig;
 
 export type Primitive<T> =
   | Note<T>
@@ -43,5 +72,5 @@ export interface ParallelMusic<T> {
 }
 export interface ModifiedMusic<T> {
   music: Music<T>;
-  control: number;
+  control: Control;
 }
